@@ -18,6 +18,8 @@ The Plan:
 3. Find the working config for the qemu vm to run
 4. Run Sharphound inside the win10 vm
 
+=====
+
 1. Getting a Win10 VM
 
 This one comes preinstalled, with a 90 days trial license:
