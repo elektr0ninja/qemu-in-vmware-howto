@@ -6,17 +6,17 @@ Initial problem: MS Defender does not allow Sharphound usage on domain joined as
 
 Workaround: run a non-joined independent Win10 vm on a linux machine (which does not have defender on it).
 
-Restrictions:
-	• The linux host is already a VM --> Virtualbox / Vmware will never run in such an environment
-	• No KVM support available --> Probably horrible performance
+Expectations:
+* The linux host is already a VM --> Virtualbox / Vmware will never run in such an environment.
+* No KVM support available --> Probably horrible performance
 
 Since QEMU can act as an Emulator, no KVM is essential to run the guest OS. It could run inside a VM.
 
-Plan:
-	1. Get a Windows 10 VM (preferably vbox ova format)
-	2. Convert it to qemu-compatible
-	3. Find the working config for the qemu vm to run
-	4. Run Sharphound inside the win10 vm
+The Plan:
+1. Get a Windows 10 VM (preferably vbox ova format)
+2. Convert it to qemu-compatible format
+3. Find the working config for the qemu vm to run
+4. Run Sharphound inside the win10 vm
 
 1. Getting a Win10 VM
 
@@ -60,7 +60,7 @@ Executing the command will start the vm and windows boots up :)
 
 [img]
 
-Running SharpHound in the VM:
+4. Running SharpHound in the VM:
 
 [img]
 
