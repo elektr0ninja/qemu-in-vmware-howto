@@ -46,16 +46,27 @@ After one week of googling and some trial+error, the following config proved to 
 └─$ qemu-system-x86_64 -machine q35 -global driver=cfi.pflash01,property=secure,value=on -drive if=pflash,format=raw,unit=0,file=/usr/share/ovmf/OVMF.fd,readonly=on -m 4G -smp 2 -drive id=disk,file=msedge-win10.qcow2,if=none -device ahci,id=ahci -device ide-hd,drive=disk,bus=ahci.0 -netdev user,id=net0,net=192.168.0.0/24,dhcpstart=192.168.0.9 -device virtio-net-pci,netdev=net0 -vga virtio -cdrom virtio-win.iso -boot c --accel tcg,thread=single
 
 Let's see what it says:
+
 qemu-system-x86_64 : this is the qemu executable, as it will be running on a x86_64 machine
+
 -machine q35 : this tells qemu that it has to emulate a q35 architecture, which is basically modern pc
+
 -global driver=cfi.pflash01,property=secure,value=on -drive if=pflash,format=raw,unit=0,file=/usr/share/ovmf/OVMF.fd,readonly=on  : this two parameter add the EFI bios SPI flash device, which allows secure boot
+
 -m 4G  : the VM will have 4 GB RAM
+
 -smp 2 : we give the VM 2 cpu cores
+
 -drive id=disk,file=msedge-win10.qcow2,if=none -device ahci,id=ahci -device ide-hd,drive=disk,bus=ahci.0  : with these 3 parameters we give the disk image to the vm on a virtual ahci bus, as disk device 0
+
 -netdev user,id=net0,net=192.168.0.0/24,dhcpstart=192.168.0.9 -device virtio-net-pci,netdev=net0 : this 2 parameter adds the networking capability
+
 -vga virtio   : we use the virtio vga driver
+
 -cdrom virtio-win.iso  : we add this image as a cd-rom with the virtio drivers. This is basically the qemu equivalent of the virtualox guest additions and drivers. It can be downloaded https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
 -boot c : boot from the first hard driver
+
 --accel tcg,thread=single : this is needed to avoid random crashes due to a bug in qemu's Tiny Code Generator component.
 
 Executing the command will start the vm and windows boots up :)
